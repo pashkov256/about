@@ -184,44 +184,47 @@
       </div>
    </section>
 
-   <!-- Скрипт для хакерского фона -->
    <script>
       const canvas = document.getElementById('matrixCanvas');
       const ctx = canvas.getContext('2d');
-
+    
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-
+    
       const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+{}:"<>?[];\',./`~';
       const charArray = characters.split('');
       const fontSize = 14;
       const columns = canvas.width / fontSize;
       const drops = [];
-
+    
       for (let i = 0; i < columns; i++) {
-         drops[i] = Math.floor(Math.random() * canvas.height);
+        drops[i] = Math.floor(Math.random() * canvas.height);
       }
-
+    
+      let gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      gradient.addColorStop(0, '#0fe'); // Синий
+      gradient.addColorStop(1, '#0048ff'); // Зеленый
+    
       function draw() {
-         ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-         ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-         ctx.fillStyle = '#00ccff';
-         ctx.font = `${fontSize}px monospace`;
-
-         for (let i = 0; i < drops.length; i++) {
-            const text = charArray[Math.floor(Math.random() * charArray.length)];
-            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-               drops[i] = 0;
-            }
-            drops[i]++;
-         }
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+        ctx.fillStyle = gradient;
+        ctx.font = `${fontSize}px monospace`;
+    
+        for (let i = 0; i < drops.length; i++) {
+          const text = charArray[Math.floor(Math.random() * charArray.length)];
+          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+    
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+          }
+          drops[i]++;
+        }
       }
-
+    
       setInterval(draw, 50);
-   </script>
+    </script>
 
    <!-- Technologies Section -->
    <section class="container mx-auto px-4 py-20">
