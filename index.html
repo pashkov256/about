@@ -58,8 +58,8 @@
       }
 
       .avatar {
-         width: 300px;
-         height: 300px;
+         width: 200px;
+         height: 200px;
       }
 
       .button {
@@ -70,18 +70,81 @@
          padding: 10px;
 
          color: #fff;
-         font-size: 18px;
+         font-size: 16px;
          font-weight: 700;
          border-radius: 8px;
          transition: 0.4s ease;
          transition: all 0.3s ease-in-out;
-         padding: 12px 18px;
+         padding: 10px 16px;
       }
 
       .card__main {
          padding: 20px;
          backdrop-filter: blur(8px);
          border-radius: 40px;
+      }
+
+      @media (max-width: 768px) {
+         .avatar {
+            width: 150px;
+            height: 150px;
+         }
+
+         h1 {
+            font-size: 2.5rem !important;
+         }
+
+         h2 {
+            font-size: 2rem !important;
+         }
+
+         h3 {
+            font-size: 1.5rem !important;
+         }
+
+         .button {
+            font-size: 14px;
+            padding: 8px 12px;
+         }
+
+         .card__main {
+            padding: 15px;
+         }
+
+         .grid-cols-2 {
+            grid-template-columns: repeat(1, 1fr) !important;
+         }
+
+         .grid-cols-4 {
+            grid-template-columns: repeat(2, 1fr) !important;
+         }
+
+         .grid-cols-3 {
+            grid-template-columns: repeat(1, 1fr) !important;
+         }
+
+         .card {
+            margin-bottom: 0px !important;
+         }
+
+         .ttl {
+            font-size: 5vw !important;
+         }
+
+         .desc {
+            display: none;
+            font-size: 3vw !important;
+         }
+
+         .desc-mobile {
+            display: block !important;
+            font-size: 12px !important;
+            ;
+         }
+      }
+
+      .desc-mobile {
+         display: none;
       }
    </style>
 </head>
@@ -98,13 +161,16 @@
          <div class="mt-12 animate__animated animate__fadeInUp avatar-wrapper">
             <img src="https://avatars.githubusercontent.com/u/94466508?v=4" class="w-96 rounded-lg avatar">
          </div>
-         <h1 class="text-6xl font-bold neon-text mb-4">
+         <h1 class="text-6xl font-bold neon-text mb-4 ttl">
             Hi there, I'm <a href="https://temaweb10.github.io/temapashkov"
                class="hover:text-white transition duration-300">Artem Pashkov</a>
             <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="40px" class="inline-block">
          </h1>
-         <h3 class="text-2xl mb-12">🚀 <span class="neon-text">Software Engineer |</span> 💻 <span
+         <h3 class="text-2xl mb-12 desc">🚀 <span class="neon-text">Software Engineer |</span> 💻 <span
                class="neon-text">Open Source Enthusiast |</span> 🌍 <span class="neon-text">From Russia</span> </h3>
+         <h3 class="text-2xl mb-12 desc-mobile"> 🚀<span class="neon-text">Software Engineer</span>🚀 <br />💻<span
+               class="neon-text">Open Source Enthusiast</span>💻 <br />🌍<span class="neon-text">From Russia</span>🌍
+         </h3>
          <div class="flex justify-center gap-4">
             <a href="https://t.me/pashkov256" class="bg-gray-800 px-6 py-3 rounded-lg button hover-glow">Contact Me</a>
             <a href="https://github.com/temaweb10" class="bg-gray-800 px-6 py-3 rounded-lg button hover-glow">GitHub</a>
@@ -262,7 +328,6 @@
    <!-- Footer -->
    <footer class="text-center py-12">
       <p class="text-sm">© 2025 Artem Pashkov. All rights reserved.</p>
-
    </footer>
 </body>
 
