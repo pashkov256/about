@@ -5,377 +5,189 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Artem Pashkov - Software Engineer</title>
-   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-
-   <link rel="icon" type="image/ico" sizes="64x64" href="i.ico">
-   <link rel="manifest" href="site.webmanifest">
-   <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&family=Inter:wght@400;500;700&display=swap"
-      rel="stylesheet">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-   <style>
-      body {
-         font-family: 'Inter', sans-serif;
-         background-color: #191a1b;
-         color: #ccd6f6;
-      }
-
-      .neon-text {
-         color: rgb(0, 204, 195, 1);
-         text-shadow: 0 0 2px rgb(0, 204, 195, 1), 0 0 5px rgb(0, 204, 195, 1);
-      }
-
-      .neon-border {
-         border: 2px solid rgb(0, 204, 195, 1);
-         box-shadow: 0 0 2px rgb(0, 204, 195, 1), 0 0 5px rgb(0, 204, 195, 1);
-      }
-
-      .hover-glow:hover {
-         box-shadow: 0 0 5px rgb(0, 204, 195, 1), 0 0 10px rgb(0, 204, 195, 1);
-      }
-
-      .gradient-bg {
-         background-color: #191a1b;
-      }
-
-      .card {
-         background: #3b3b3b;
-         border-radius: 12px;
-         transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-
-      .card:hover {
-         cursor: pointer;
-         transform: translateY(-10px);
-         box-shadow: 0 10px 20px rgba(100, 255, 218, 0.2);
-      }
-
-      .avatar-wrapper {
-         display: flex;
-         justify-content: center;
-         padding-bottom: 28px;
-      }
-
-      .avatar {
-         width: 200px;
-         height: 200px;
-      }
-
-      .button {
-         font-family: "Montserrat", sans-serif;
-         border: 2px solid rgba(0, 186, 204, 1);
-         border-image-slice: 1;
-         text-decoration: none;
-         padding: 10px;
-
-         color: #fff;
-         font-size: 16px;
-         font-weight: 700;
-         border-radius: 8px;
-         transition: 0.4s ease;
-         transition: all 0.3s ease-in-out;
-         padding: 10px 16px;
-      }
-
-      .card__main {
-         padding: 20px;
-         backdrop-filter: blur(8px);
-         border-radius: 40px;
-      }
-
-      .card:hover {
-         background-color: #ccd6f6;
-         font-weight: 500;
-         color: #3b3b3b;
-      }
-
-      @media (max-width: 768px) {
-         .avatar {
-            width: 150px;
-            height: 150px;
-         }
-
-         h1 {
-            font-size: 2.5rem !important;
-         }
-
-         h2 {
-            font-size: 2rem !important;
-         }
-
-         h3 {
-            font-size: 1.5rem !important;
-         }
-
-         .button {
-            font-size: 14px;
-            padding: 8px 12px;
-         }
-
-         .card__main {
-            padding: 15px;
-         }
-
-         .grid-cols-2 {
-            grid-template-columns: repeat(1, 1fr) !important;
-         }
-
-         .grid-cols-4 {
-            grid-template-columns: repeat(2, 1fr) !important;
-         }
-
-         .grid-cols-3 {
-            grid-template-columns: repeat(1, 1fr) !important;
-         }
-
-         .card {
-            margin-bottom: 0px !important;
-         }
-
-         .ttl {
-            font-size: 5vw !important;
-         }
-
-         .desc {
-            display: none;
-            font-size: 3vw !important;
-         }
-
-         .desc-mobile {
-            display: block !important;
-            font-size: 12px !important;
-            ;
-         }
-      }
-
-      .desc-mobile {
-         display: none;
-      }
-   </style>
+   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+   <link rel="manifest" href="/site.webmanifest">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="styles.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
 </head>
 
-<body class="gradient-bg">
-   <!-- Hero Section -->
-   <section class="min-h-screen flex flex-col justify-center items-center text-center px-4 relative overflow-hidden">
-      <!-- Хакерский фон с падающими символами -->
-      <div class="absolute inset-0 z-0">
-         <canvas id="matrixCanvas" class="w-full h-full"></canvas>
+<body>
+   <!-- Custom Cursor -->
+   <div class="custom-cursor"></div>
+   <div class="custom-cursor-dot"></div>
+
+   <!-- 3D Background -->
+   <div id="three-container"></div>
+
+   <!-- Animated Background -->
+   <div class="animated-bg">
+      <div class="gradient-blob blob-1"></div>
+      <div class="gradient-blob blob-2"></div>
+      <div class="gradient-blob blob-3"></div>
+   </div>
+
+   <!-- Matrix Rain Canvas -->
+   <canvas id="matrix-rain" class="matrix-rain"></canvas>
+
+   <!-- Floating Code Symbols -->
+   <div class="floating-symbols">
+      <div class="floating-symbol">{ }</div>
+      <div class="floating-symbol">&lt;/&gt;</div>
+      <div class="floating-symbol">[]</div>
+      <div class="floating-symbol">()</div>
+      <div class="floating-symbol">#!/</div>
+   </div>
+
+   <header class="hero">
+      <div class="container">
+         <div class="profile-card">
+            <div class="profile-image">
+               <img src="https://avatars.githubusercontent.com/u/94466508?v=4" alt="Profile Picture" class="profile-avatar">
+            </div>
+            <h1>Hi there, I'm <a href="https://pashkov256.github.io/about/" class="gradient-text">Artem Pashkov</a></h1>
+     
+            <div class="profile-info-container">
+               <h3>🚀 Software Engineer </h3>
+               <h3>💻 Open Source Enthusiast</h3>
+               <h3>🌍 From Russiat</h3>
+            </div>
+         </div>
       </div>
+   </header>
 
-      <div class="animate__animated animate__fadeIn z-10 card__main">
-         <div class="mt-12 animate__animated animate__fadeInUp avatar-wrapper">
-            <img src="https://avatars.githubusercontent.com/u/94466508?v=4" class="w-96 rounded-lg avatar">
-         </div>
-         <h1 class="text-6xl font-bold neon-text mb-4 ttl">
-            Hi there, I'm <a href="https://temaweb10.github.io/temapashkov"
-               class="hover:text-white transition duration-300">Artem Pashkov</a>
-            <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="40px" class="inline-block">
-         </h1>
-         <h3 class="text-2xl mb-12 desc">🚀 <span class="neon-text">Software Engineer |</span> 💻 <span
-               class="neon-text">Open Source Enthusiast |</span> 🌍 <span class="neon-text">From Russia</span> </h3>
-         <h3 class="text-2xl mb-12 desc-mobile"> 🚀<span class="neon-text">Software Engineer</span>🚀 <br />💻<span
-               class="neon-text">Open Source Enthusiast</span>💻 <br />🌍<span class="neon-text">From Russia</span>🌍
-         </h3>
-         <div class="flex justify-center gap-4">
-            <a href="https://t.me/pashkov256" class="bg-gray-800 px-6 py-3 rounded-lg button hover-glow">Contact Me</a>
-            <a href="https://github.com/pashkov256/"
-               class="bg-gray-800 px-6 py-3 rounded-lg button hover-glow">GitHub</a>
-         </div>
-      </div>
-   </section>
-
-   <script>
-      const canvas = document.getElementById('matrixCanvas');
-      const ctx = canvas.getContext('2d');
-    
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    
-      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+{}:"<>?[];\',./`~';
-      const charArray = characters.split('');
-      const fontSize = 14;
-      const columns = canvas.width / fontSize;
-      const drops = [];
-    
-      for (let i = 0; i < columns; i++) {
-        drops[i] = Math.floor(Math.random() * canvas.height);
-      }
-    
-      let gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      gradient.addColorStop(0, '#0fe'); // Синий
-      gradient.addColorStop(1, '#0048ff'); // Зеленый
-    
-      function draw() {
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
-        ctx.fillStyle = gradient;
-        ctx.font = `${fontSize}px monospace`;
-    
-        for (let i = 0; i < drops.length; i++) {
-          const text = charArray[Math.floor(Math.random() * charArray.length)];
-          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-    
-          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-            drops[i] = 0;
-          }
-          drops[i]++;
-        }
-      }
-    
-      setInterval(draw, 50);
-    </script>
-
-   <!-- Technologies Section -->
-   <section class="container mx-auto px-4 py-20">
-      <h2 class="text-4xl font-bold text-center neon-text mb-12">Technologies & Tools</h2>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-         <div class="card p-6 text-center">
-            <img src="https://cdn.worldvectorlogo.com/logos/go-8.svg" alt="Go" class="w-16 h-16 mx-auto mb-4">
-            <p class="text-lg">Go</p>
-         </div>
-         <div class="card p-6 text-center">
-            <img src="https://cdn.worldvectorlogo.com/logos/typescript.svg" alt="TypeScript"
-               class="w-16 h-16 mx-auto mb-4">
-            <p class="text-lg">TypeScript</p>
-         </div>
-         <div class="card p-6 text-center">
-            <img src="https://cdn.worldvectorlogo.com/logos/postgresql.svg" alt="PostgreSQL"
-               class="w-16 h-16 mx-auto mb-4">
-            <p class="text-lg">PostgreSQL</p>
-         </div>
-         <div class="card p-6 text-center">
-            <img src="https://cdn.worldvectorlogo.com/logos/mongodb-icon-1.svg" alt="MongoDB"
-               class="w-16 h-16 mx-auto mb-4">
-            <p class="text-lg">MongoDB</p>
-         </div>
-         <div class="card p-6 text-center">
-            <img src="https://cdn.worldvectorlogo.com/logos/redis.svg" alt="Redis" class="w-16 h-16 mx-auto mb-4">
-            <p class="text-lg">Redis</p>
-         </div>
-         <div class="card p-6 text-center">
-            <img src="https://cdn.worldvectorlogo.com/logos/docker.svg" alt="Docker" class="w-16 h-16 mx-auto mb-4">
-            <p class="text-lg">Docker</p>
-         </div>
-         <div class="card p-6 text-center">
-            <img src="https://cdn.worldvectorlogo.com/logos/git-icon.svg" alt="Git" class="w-16 h-16 mx-auto mb-4">
-            <p class="text-lg">Git</p>
+   <section class="technologies">
+      <div class="container">
+         <h2>🛠️ Technologies & Tools</h2>
+         <div class="tech-grid">
+            <div class="tech-item" data-tech="Go">
+               <img src="https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white" alt="Go">
+            </div>
+            <div class="tech-item" data-tech="TypeScript">
+               <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript">
+            </div>
+            <div class="tech-item" data-tech="PostgreSQL">
+               <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL">
+            </div>
+            <div class="tech-item" data-tech="MongoDB">
+               <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB">
+            </div>
+            <div class="tech-item" data-tech="Redis">
+               <img src="https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white" alt="Redis">
+            </div>
+            <div class="tech-item" data-tech="Docker">
+               <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker">
+            </div>
+            <div class="tech-item" data-tech="Git">
+               <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git">
+            </div>
          </div>
       </div>
    </section>
 
-   <!-- About Me Section -->
-   <section class="container mx-auto px-4 py-20">
-      <h2 class="text-4xl font-bold text-center neon-text mb-12">About Me</h2>
-      <div class="max-w-2xl mx-auto text-lg">
-         <p class="mb-6">🎓 I’m currently studying at <strong>Nizhny Novgorod College of Information Technology and Law
-               <a href="https://www.ntitp.ru/" class="text-blue-400 hover:text-blue-300">(НТИТП)</a></strong> in my
-            second year, majoring in <strong>Information Systems and Programming</strong>.</p>
-         <p class="mb-6">💼 Working as a <strong>Software Engineer</strong> with a focus on backend development.</p>
-         <p class="mb-6">🧠 In my free time, I solve problems on <a href="https://www.codewars.com/users/temaweb10"
-               class="text-blue-400 hover:text-blue-300">Codewars</a> and <a href="https://leetcode.com/u/temaweb10/"
-               class="text-blue-400 hover:text-blue-300">LeetCode</a>, write technical articles on <a
-               href="https://habr.com/ru/users/temaweb10/publications/articles/"
-               class="text-blue-400 hover:text-blue-300">Habr</a>.</p>
-         <p class="mb-6">📫 How to reach me: <a href="https://t.me/pashkov256"
-               class="text-blue-400 hover:text-blue-300">Telegram</a></p>
-      </div>
-   </section>
-
-   <!-- Latest Articles Section -->
-   <section class="container mx-auto px-4 py-20">
-      <h2 class="text-4xl font-bold text-center neon-text mb-12">My Latest Habr Articles</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-         <div class="card p-6">
-            <div style="display: flex;justify-content: space-between;">
-               <h3 class="text-2xl font-bold mb-4">AI как новый опиум для разработчиков</h3>
-               <strong>👁️(9.1k+)</strong>
-
-            </div>
-
-            <p class="mb-4">Зависимость, которая убивает индустрию.</p>
-            <a href="https://habr.com/ru/articles/887076/" class="text-blue-400 hover:text-blue-300">Read More →</a>
-         </div>
-         <div class="card p-6">
-            <div style="display: flex;justify-content: space-between;">
-               <h3 class="text-2xl font-bold mb-4">Как я делал загрузчик файлов на react</h3>
-               <strong>👁️(3.9k+)</strong>
-
-            </div>
-
-            <p class="mb-4">И выложил на npm.</p>
-            <a href="https://habr.com/ru/articles/807985/" class="text-blue-400 hover:text-blue-300">Read More →</a>
+   <section class="about glass-card">
+      <div class="container">
+         <h2 class="glitch" data-text="👨‍💻 About Me">👨‍💻 About Me</h2>
+         <div class="about-content">
+            <ul>
+               <li>🎓 Currently studying at <strong>Nizhny Novgorod College of Information Technology and Law (NTITP)</strong></li>
+               <li>💼 Working as a <strong>Software Engineer</strong> with a focus on backend development</li>
+               <li>🧠 Solving problems on <a href="https://www.codewars.com/users/temaweb10" target="_blank">Codewars</a></li>
+               <li>✍️ Writing technical articles on <a href="https://habr.com/ru/users/temaweb10/publications/articles/" target="_blank">Habr</a></li>
+               <li>📫 Reach me on <a href="https://t.me/pashkov256" target="_blank">Telegram</a></li>
+            </ul>
          </div>
       </div>
    </section>
 
-   <!-- Open Source Projects Section -->
-   <section class="container mx-auto px-4 py-20">
-      <h2 class="text-4xl font-bold text-center neon-text mb-12">Open Source Projects</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-         <div class="card p-6 mb-12">
-            <div style="display: flex;justify-content: space-between;">
-               <h3 class="text-2xl font-bold">tcache</h3>
-               <p>⭐4</p>
+   <section class="articles">
+      <div class="container">
+         <h2 class="glitch" data-text="📚 Latest Articles">📚 Latest Articles</h2>
+         <div class="article-grid">
+            <div class="article-card glass-card">
+               <h3>AI как новый опиум для разработчиков</h3>
+               <p>Зависимость, которая убивает индустрию</p>
+               <div class="article-stats">
+                  <span>👀 9.1K views</span>
+               </div>
             </div>
-
-            <p class="mb-4">High performance and easy-to-use in memory cache with TTL and LRU.</p>
-            <a href="https://github.com/pashkov256/tcache" class="text-blue-400 hover:text-blue-300">View on GitHub
-               →</a>
-         </div>
-         <div class="card p-6  mb-12">
-            <div style="display: flex;justify-content: space-between;">
-               <h3 class="text-2xl font-bold">schedify</h3>
-               <p>⭐3</p>
+            <div class="article-card glass-card">
+               <h3>Загрузчик файлов на React</h3>
+               <p>Как я делал загрузчик файлов и выложил на npm</p>
+               <div class="article-stats">
+                  <span>👀 3.9K views</span>
+               </div>
             </div>
-
-            <p class="mb-4">A simple yet powerful task scheduler.</p>
-            <a href="https://github.com/pashkov256/schedify" class="text-blue-400 hover:text-blue-300">View on GitHub
-               →</a>
          </div>
-         <div class="card p-6  mb-12">
-            <div style="display: flex;justify-content: space-between;">
-               <h3 class="text-2xl font-bold">deletor</h3>
-               <p>⭐1</p>
-            </div>
-
-            <p class="mb-4">Utility for Deleting Files by Extension and Size</p>
-            <a href="https://github.com/pashkov256/deletor" class="text-blue-400 hover:text-blue-300">View on GitHub
-               →</a>
-         </div>
-         <div class="card p-6  mb-12">
-            <div style="display: flex;justify-content: space-between;">
-               <h3 class="text-2xl font-bold">voprosnikum</h3>
-               <p>⭐8</p>
-            </div>
-
-            <p class="mb-4">Student testing platform for the NTITP Technical College <a
-                  href="https://github.com/pashkov256/voprosnikum-backend"
-                  class="text-blue-400 hover:text-blue-300">backend</a> (⭐3) and <a
-                  href="https://github.com/pashkov256/voprosnikum-frontend"
-                  class="text-blue-400 hover:text-blue-300">frontend</a> (⭐5)</p>
-            <a href="https://github.com/pashkov256/voprosnikum-frontend" class="text-blue-400 hover:text-blue-300">View
-               on GitHub →</a>
-         </div>
-         <div class="card p-6  mb-12">
-            <div style="display: flex;justify-content: space-between;">
-               <h3 class="text-2xl font-bold">react-file-uploadify</h3>
-               <p>⭐3</p>
-            </div>
-
-            <p class="mb-4">A flexible and customizable reactjs file library.</p>
-            <a href="https://github.com/pashkov256/react-file-uploadify" class="text-blue-400 hover:text-blue-300">View
-               on GitHub →</a>
-         </div>
-
-
       </div>
    </section>
 
-   <!-- Footer -->
-   <footer class="text-center py-12">
-      <p class="text-sm">© 2025 Artem Pashkov. All rights reserved.</p>
+   <section class="projects">
+      <div class="container">
+         <h2 class="glitch" data-text="🏆 Open Source Projects">🏆 Open Source Projects</h2>
+         <div class="project-grid">
+            <div class="project-card glass-card">
+               <h3>deletor</h3>
+               <p>Interactive File Deletion Tool</p>
+               <div class="project-stats">
+                  <span>⭐ 7</span>
+               </div>
+            </div>
+            <div class="project-card glass-card">
+               <h3>tcache</h3>
+               <p>High performance in-memory cache with TTL and LRU</p>
+               <div class="project-stats">
+                  <span>⭐ 4</span>
+               </div>
+            </div>
+            <div class="project-card glass-card">
+               <h3>schedify</h3>
+               <p>Simple yet powerful task scheduler</p>
+               <div class="project-stats">
+                  <span>⭐ 3</span>
+               </div>
+            </div>
+            <div class="project-card glass-card">
+               <h3>react-file-uploadify</h3>
+               <p>Flexible and customizable React file library</p>
+               <div class="project-stats">
+                  <span>⭐ 3</span>
+                  <span>📥 5k+</span>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <section class="connect">
+      <div class="container">
+         <h2 class="glitch" data-text="🤝 Let's Connect">🤝 Let's Connect</h2>
+         <div class="social-links">
+            <a href="https://t.me/pashkov256" target="_blank">
+               <img src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram">
+            </a>
+            <a href="https://github.com/pashkov256" target="_blank">
+               <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+            </a>
+         </div>
+      </div>
+   </section>
+
+   <footer>
+      <div class="container">
+         <p>
+            <img src="https://komarev.com/ghpvc/?username=temaweb10&label=Profile%20views&color=0e75b6&style=flat" alt="Profile Views">
+         </p>
+      </div>
    </footer>
+
+   <script src="script.js"></script>
+   <script src="three-effects.js"></script>
+   <script src="interactive-bg.js"></script>
 </body>
 
 </html>
